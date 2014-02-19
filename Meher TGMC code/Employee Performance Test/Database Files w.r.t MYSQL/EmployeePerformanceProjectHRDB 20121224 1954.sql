@@ -1,0 +1,84 @@
+-- MySQL Administrator dump 1.4
+--
+-- ------------------------------------------------------
+-- Server version	5.5.28
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+
+--
+-- Create schema hr
+--
+
+CREATE DATABASE IF NOT EXISTS hr;
+USE hr;
+
+--
+-- Definition of table `qualifications`
+--
+
+DROP TABLE IF EXISTS `qualifications`;
+CREATE TABLE `qualifications` (
+  `DEPARTMENT` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `EMPLOYEE` varchar(100) DEFAULT NULL,
+  `QUESTIONS` varchar(200) DEFAULT NULL,
+  `SUPERVISOR` varchar(100) DEFAULT NULL,
+  `REVIEW_MANAGER` varchar(100) DEFAULT NULL,
+  `FLAG` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`DEPARTMENT`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `qualifications`
+--
+
+/*!40000 ALTER TABLE `qualifications` DISABLE KEYS */;
+/*!40000 ALTER TABLE `qualifications` ENABLE KEYS */;
+
+
+--
+-- Definition of table `user_data`
+--
+
+DROP TABLE IF EXISTS `user_data`;
+CREATE TABLE `user_data` (
+  `USERNAME` varchar(20) NOT NULL,
+  `PASSWORD` varchar(45) NOT NULL,
+  `NAME` varchar(45) NOT NULL,
+  `EMAIL_ID` varchar(45) NOT NULL,
+  `PHONE_NUMBER` int(10) unsigned NOT NULL,
+  `AGE` int(10) unsigned NOT NULL,
+  `DOB` varchar(45) NOT NULL,
+  `CITY` varchar(45) NOT NULL,
+  PRIMARY KEY (`USERNAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user_data`
+--
+
+/*!40000 ALTER TABLE `user_data` DISABLE KEYS */;
+INSERT INTO `user_data` (`USERNAME`,`PASSWORD`,`NAME`,`EMAIL_ID`,`PHONE_NUMBER`,`AGE`,`DOB`,`CITY`) VALUES 
+ ('kmitdhr','test','HR','h@h.com',90000009,25,'12-7-1991','Hyd'),
+ ('kmitdhr12','test','HR','h@h.com',9000009,25,'12-7-1991','Hyd'),
+ ('kmit_hr1','test','HR','h@h.com',9000009,25,'12-7-1991','Hyd');
+/*!40000 ALTER TABLE `user_data` ENABLE KEYS */;
+
+
+
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

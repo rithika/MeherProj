@@ -1,0 +1,17 @@
+@charset "utf-8";
+
+/* CSS Document */
+body {
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+.passed
+{
+	color: green;
+}
+
+.failed 
+{
+	color:red;
+}
+

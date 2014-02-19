@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<%@ page import="java.util.*"%>
+<%
+
+ResourceBundle 	rb=(ResourceBundle)getServletContext().getAttribute("RB_US");
+ if (session.getAttribute("Language").toString().equalsIgnoreCase("fr"))
+	rb=(ResourceBundle)getServletContext().getAttribute("RB_FR");
+else if (session.getAttribute("Language").toString().equalsIgnoreCase("gr"))
+		rb=(ResourceBundle)getServletContext().getAttribute("RB_GER");
+ 
+else if (session.getAttribute("Language").toString().equalsIgnoreCase("hi"))
+	rb=(ResourceBundle)getServletContext().getAttribute("RB_IN");
+
+%>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>OverAll Performance</title>
+
+
+<script language="javascript" type="text/javascript" src="stylesheets,scripts,images/sendmail.js">
+
+</script>
+<link rel="stylesheet" href="stylesheets,scripts,images/average.css" />
+<link rel="stylesheet" href="stylesheets,scripts,images/text.css" />
+</head>
+
+<body>
+
+<div class="container2"></div>
+<div class="container">
+
+<div class="header"><br />
+<%="<center><font face=Verdana, Geneva, sans-serif color=#FFFFFF><i><b>"+rb.getString("Welcome")+": "+session.getAttribute("Name")+"</b></i></font></center><br />" %>
+</div>
+
+
+<div class="sidebar1"><br />
+<font class="sidebartext" face="Times New Roman, Times, serif"><%= rb.getString("Info") %>:</font><br />
+<br />
+<ul class="nav">
+
+	<%= "<li><font class=sidebartext size=+1 face=Times New Roman, Times, serif>"+rb.getString("Name")+": "+session.getAttribute("Name")+"</font></li>" %>
+	<%= "<li><font class=sidebartext size=+1 face=Times New Roman, Times, serif>"+rb.getString("Email_ID")+": "+session.getAttribute("Email_ID")+"</font></li>" %>
+	<li><font class="sidebartext" size="+1"
+		face="Times New Roman, Times, serif"><a
+		href="2(hr_loggedin).jsp"><%= rb.getString("Back") %></a></font></li>
+	<li><font class="sidebartext" size="+1"
+		face="Times New Roman, Times, serif"><a href="1(home2).jsp"><%= rb.getString("Logout")%></a></font>
+	</li>
+</ul>
+
+</div>
+<div class="content">
+<center><br />
+<br />
+<div id="tainer1"><p>
+  <img src="stylesheets,scripts,images/images/printer.png" onclick="window.print(0)" alt="Print" height="32" width="32" />
+<br />
+<%
+int j=1;
+int finalscr=0;
+session.setAttribute("from","Perform");
+out.print("Performance of all the Employees<br />");
+while(j<6){
+	int check=0;
+HashMap<String,Object> avg_map= (HashMap<String,Object>) session.getAttribute("result_emplyees"+j);
+String emps="a";
+for(int i=1; i<6; i++)
+{
+	emps=emps.concat(","+"kmitd"+j+"_e"+i);
+}
+String[] empsa= emps.split(",");
+
+out.println("Department "+j+": ");
+out.println("<table width=80% style=\"border-style:inset\" >");
+out.println("<tr><td>Employee ID</td><td>Result</td><td>Remark</td><td></td></tr>");
+out.println("<tr><td colspan=4><hr /></td></tr>");
+
+
+for(int i=1; i<6; i++)
+{
+	if(avg_map.containsKey(empsa[i]) && Float.parseFloat(avg_map.get(empsa[i]).toString())>= 7.0f ){
+		check++; out.print("<tr><td>"+empsa[i]+"</td><td>"+avg_map.get(empsa[i])+"</td><td class=passed>PASSED</td><td><input type=button value=\"Send Mail\" id=\"g,"+empsa[i]+"\" onclick=mailerg(id) /></td></tr>");}
+	else if(avg_map.containsKey(empsa[i]) && Float.parseFloat(avg_map.get(empsa[i]).toString()) <  7.0f )
+		out.print("<tr><td>"+empsa[i]+"</td><td>"+avg_map.get(empsa[i])+"</td><td class=failed>FAILED</td><td><input type=button value=\"Send Mail\" id=\"b,"+empsa[i]+"\" onclick=mailerg(id) /></td></tr>");
+}
+out.println("<br />");
+j++;
+out.println("</table>");
+if(check > 3){
+	out.println("The DEPARTMENTS overall performanace is <font color=green>Very GOOD</font>");
+	finalscr++;
+	out.println("<br /><br /><br /><br />");
+}
+else if(check < 3){
+	out.println("The DEPARTMENTS overall performanace is <font color=red>AVERAGE</font>");
+	out.println("<br /><br /><br /><br />");
+}
+//avg_map.clear();
+}
+out.println("<h3>Company's Performance Final RESULT: </h3><br /><br /><br />");
+if(finalscr > 3)
+	out.println("<h2>The Company's Over ALL PERFORMANCE is <font color=green>EXCELLENT!</font></h2>");
+else
+	out.println("<h2>The Company's Over ALL PERFORMANCE has to be <font color=red>IMPROVED!</font></h2>");
+%>
+<br />
+<br />
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+
+</div>
+</center>
+</div>
+<div class="footer"><img src="stylesheets,scripts,images/images/CodePassion_sm.gif"
+	height="70" width="250" /></div>
+
+</div>
+
+
+
+</body>
+</html>
